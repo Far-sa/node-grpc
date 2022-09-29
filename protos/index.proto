@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+import "course.proto";
+
+message Person{
+    int32 id = 1;
+    string firstName  =2;
+    string lastName =3;
+    boolean isActive = 4;
+    float height = 5;
+    bytes image = 6;
+    repeated string mobiles = 7; // Array of phone numbers
+    enum Skills{
+        PROGRAMMER = 0;
+        FRONTEND = 1;
+        BACKEND = 2;
+        NODEJS = 3;
+        REACT = 4;
+    }
+    Skills skill = 8;
+    Date BD = 9;
+    packageCourse.Course course = 10;
+}
+
+
+message Date{
+    int32 year = 1;
+    int32 month = 2;
+    int32 day = 3;
+    int32 week = 4;
+    string time = 5
+}
