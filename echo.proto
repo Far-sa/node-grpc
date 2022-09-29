@@ -5,6 +5,7 @@ package echoPackage;
 message EchoMessage {
     string value = 1;
 }
+message Empty{}
 
 //  methods => 
 // unary(req,res classic) 
@@ -15,6 +16,6 @@ message EchoMessage {
 service EchoService{
     rpc EchoUnary (EchoMessage) returns (EchoMessage);
     rpc EchoClientStream (stream EchoMessage) returns (EchoMessage);
-    rpc EchoServerStream (EchoMessage) returns (stream EchoMessage);
+    rpc EchoServerStream (Empty) returns (stream EchoMessage);
     rpc EchoBidiStream (stream EchoMessage) returns (stream EchoMessage);
 }

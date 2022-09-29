@@ -7,11 +7,24 @@ const echoDefinition = grpc.loadPackageDefinition(echoProto)
 const { echoPackage } = echoDefinition
 const serverURL = 'localhost:5500'
 
-function EchoUnary (call, callback) {}
+//* Function/Methods
+function EchoUnary (call, callback) {
+  console.log('data', call.request)
+  callback(null, call)
+}
 function EchoClientStream (call, callback) {}
-function EchoServerStream (call, callback) {}
+
+function EchoServerStream (call, callback) {
+  for (let index = 0; index < 10; index++) {
+    call.write({ value: index })
+  }
+  call.on('end', err => {
+    console.log(err)
+  })
+}
 function EchoBidiStream (call, callback) {}
 
+//* Lunch Server
 const server = new grpc.Server()
 server.addService(echoPackage.EchoService.service, {
   EchoUnary,
