@@ -17,5 +17,5 @@ service EchoService{
     rpc EchoUnary (EchoMessage) returns (EchoMessage);
     rpc EchoClientStream (stream EchoMessage) returns (EchoMessage);
     rpc EchoServerStream (Empty) returns (stream EchoMessage);
-    rpc EchoBidiStream (stream EchoMessage) returns (stream EchoMessage);
+    rpc dateTime (stream EchoMessage) returns (stream EchoMessage);
 }

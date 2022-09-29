@@ -27,3 +27,22 @@ serverStream.on('data', data => {
 serverStream.on('end', err => {
   console.log(err)
 })
+
+const echos = [
+  { value: 'value1' },
+  { value: 'value2' },
+  { value: 'value3' },
+  { value: 'value4' }
+]
+
+const clientStream = client.EchoStream(null, (err, res) => {})
+
+let index = 0
+setInterval(() => {
+  clientStream.write(echos[index])
+  index++
+  if (index === echos.length) {
+    clearInterval(this)
+    clientStream.end()
+  }
+}, 500)

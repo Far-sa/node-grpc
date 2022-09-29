@@ -12,7 +12,15 @@ function EchoUnary (call, callback) {
   console.log('data', call.request)
   callback(null, call)
 }
-function EchoClientStream (call, callback) {}
+function EchoClientStream (call, callback) {
+  call.on('data', data => {
+    console.log('Server : ', data)
+  })
+  callback.on('end', err => {
+    console.log('Stream finished')
+    console.log(err)
+  })
+}
 
 function EchoServerStream (call, callback) {
   for (let index = 0; index < 10; index++) {
@@ -22,7 +30,7 @@ function EchoServerStream (call, callback) {
     console.log(err)
   })
 }
-function EchoBidiStream (call, callback) {}
+function dateTime (call, callback) {}
 
 //* Lunch Server
 const server = new grpc.Server()
@@ -30,7 +38,7 @@ server.addService(echoPackage.EchoService.service, {
   EchoUnary,
   EchoClientStream,
   EchoServerStream,
-  EchoBidiStream
+  dateTime
 })
 server.bind(serverURL, grpc.ServerCredentials.createInsecure())
 console.log('Running over localhost:5500')
